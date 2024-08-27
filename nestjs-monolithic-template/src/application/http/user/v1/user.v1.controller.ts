@@ -11,4 +11,10 @@ export class UserV1Controller {
       message: 'this is user v1 route',
     };
   }
+
+  async signUp(): Promise<any> {}
+
+  async signIn(): Promise<any> {}
+
+  async signOut(): Promise<any> {}
 }

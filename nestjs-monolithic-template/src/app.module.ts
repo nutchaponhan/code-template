@@ -6,7 +6,12 @@ import { PublicHttpModule } from '@application/http/pubic/public-http.module';
 import { UserHttpModule } from '@application/http/user/user-http.module';
 
 @Module({
-  imports: [AdminHttpModule, UserHttpModule, PublicHttpModule, HealthHttpModule],
+  imports: [
+    AdminHttpModule,
+    UserHttpModule,
+    PublicHttpModule,
+    HealthHttpModule,
+  ],
   controllers: [],
   providers: [],
   exports: [],
