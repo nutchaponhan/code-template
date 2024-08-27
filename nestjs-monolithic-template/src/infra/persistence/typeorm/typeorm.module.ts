@@ -2,7 +2,10 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+import { IUserRepository } from '@core/domain/user/repository/user.repository';
+
 import { User } from './entity';
+import { UserRepository } from './repository';
 
 @Module({
   imports: [
@@ -24,5 +27,6 @@ import { User } from './entity';
       },
     }),
   ],
+  providers: [{ provide: IUserRepository, useClass: UserRepository }],
 })
 export class TypeOrmPersistenceModule {}

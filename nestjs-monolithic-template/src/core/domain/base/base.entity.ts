@@ -1,10 +1,10 @@
 interface IdAutoIncrement {
-  id: number;
+  id?: number;
 }
 
 interface CreateUpdateTimeStampAt {
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 interface DeleteTimeStampAt {
@@ -14,8 +14,8 @@ interface DeleteTimeStampAt {
 export class EntityWithIdAndTimeStamp
   implements IdAutoIncrement, CreateUpdateTimeStampAt, DeleteTimeStampAt
 {
-  id: number;
-  createdAt: Date;
-  updatedAt: Date;
+  id?: number;
+  createdAt?: Date;
+  updatedAt?: Date;
   deletedAt?: Date;
 }

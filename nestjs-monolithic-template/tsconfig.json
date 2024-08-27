@@ -21,7 +21,8 @@
       "@core/*": ["./src/core/*"],
       "@application/*": ["./src/application/*"],
       "@infra/*": ["./src/infra/*"],
-      "@test/*": ["./src/test/*"]
+      "@test/*": ["./src/test/*"],
+      "@usecase/*": ["./src/usecase/*"]
     }
   }
 }
