@@ -23,8 +23,8 @@ export class User implements UserEntity {
   @Column({ name: 'password', nullable: false, type: 'varchar' })
   password: string;
 
-  @Column({ name: 'email', nullable: true, type: 'varchar' })
-  email?: string;
+  @Column({ name: 'email', nullable: false, type: 'varchar' })
+  email: string;
 
   @CreateDateColumn()
   createdAt: Date;

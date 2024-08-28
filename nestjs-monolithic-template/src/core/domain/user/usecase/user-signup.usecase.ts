@@ -1,11 +1,11 @@
 import { Result } from 'oxide.ts';
 
-import { UserEntity } from '../../entity/user.entity';
+import { UserEntity } from '../entity/user.entity';
 
 export interface UserSignUpCommand {
   firstname: string;
   lastname: string;
-  email?: string;
+  email: string;
   password: string;
 }
 

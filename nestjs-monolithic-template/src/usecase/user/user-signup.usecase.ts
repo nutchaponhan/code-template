@@ -5,7 +5,7 @@ import { IUserRepository } from '@core/domain/user/repository/user.repository';
 import {
   IUserSignUpUseCase,
   UserSignUpCommand,
-} from '@core/domain/user/usecase/signup/user-signup.usecase';
+} from '@core/domain/user/usecase/user-signup.usecase';
 
 export class UserSingUpUseCase implements IUserSignUpUseCase {
   constructor(private userRepository: IUserRepository) {}
