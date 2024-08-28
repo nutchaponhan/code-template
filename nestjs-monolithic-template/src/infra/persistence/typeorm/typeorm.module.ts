@@ -40,6 +40,6 @@ import {
     { provide: IOrderRepository, useClass: OrderRepository },
     { provide: IProductRepository, useClass: ProductRepository },
   ],
-  exports: [IUserRepository],
+  exports: [IUserRepository, IOrderRepository, IProductRepository],
 })
 export class TypeOrmPersistenceModule {}
