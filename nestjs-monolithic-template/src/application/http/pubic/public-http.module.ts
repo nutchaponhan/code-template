@@ -1,12 +1,12 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { UserSingInUseCase } from '@usecase/user/user-signin.usecase';
-import { UserSingUpUseCase } from '@usecase/user/user-signup.usecase';
+
+import { UserModule } from '@application/module/user/user.module';
 
 import { PublicV1Controller } from './v1/public.v1.controller';
 
 @Module({
-  imports: [],
-  providers: [UserSingUpUseCase, UserSingInUseCase],
+  imports: [UserModule],
+  providers: [],
   controllers: [PublicV1Controller],
 })
 export class PublicHttpModule implements NestModule {
