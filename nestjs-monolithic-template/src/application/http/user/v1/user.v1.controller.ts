@@ -1,20 +1,27 @@
-import { Controller } from '@nestjs/common';
+import { match } from 'oxide.ts';
+
+import { BadRequestException, Controller, Get } from '@nestjs/common';
+import { GetProductListUseCase } from '@usecase/product/get-product-list.usecase';
 
 @Controller({
   path: 'user',
   version: '1',
 })
 export class UserV1Controller {
-  constructor() {}
-  async get(): Promise<{ message: string }> {
-    return {
-      message: 'this is user v1 route',
-    };
+  constructor(private getProductListUseCase: GetProductListUseCase) {}
+
+  @Get('products')
+  async getProductList() {
+    const result = await this.getProductListUseCase.exec();
+    return match(result, {
+      Ok(products) {
+        return {
+          data: products,
+        };
+      },
+      Err() {
+        throw new BadRequestException();
+      },
+    });
   }
-
-  async signUp(): Promise<any> {}
-
-  async signIn(): Promise<any> {}
-
-  async signOut(): Promise<any> {}
 }
