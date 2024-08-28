@@ -1,4 +1,4 @@
-import { ValidationPipe } from '@nestjs/common';
+import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 
 import config from '@infra/configuration/config';
@@ -16,6 +16,9 @@ async function bootstrap() {
       transform: true,
     }),
   );
+  app.enableVersioning({
+    type: VersioningType.URI,
+  });
   app.setGlobalPrefix(appConfig.prefix);
 
   await app.listen(appConfig.port);

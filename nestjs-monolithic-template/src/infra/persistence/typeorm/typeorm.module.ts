@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -7,6 +7,7 @@ import { IUserRepository } from '@core/domain/user/repository/user.repository';
 import { User } from './entity';
 import { UserRepository } from './repository';
 
+@Global()
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
@@ -26,7 +27,9 @@ import { UserRepository } from './repository';
         };
       },
     }),
+    TypeOrmModule.forFeature([User]),
   ],
   providers: [{ provide: IUserRepository, useClass: UserRepository }],
+  exports: [IUserRepository],
 })
 export class TypeOrmPersistenceModule {}

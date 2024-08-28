@@ -1,5 +1,7 @@
 import { Err, Ok, Result } from 'oxide.ts';
 
+import { Injectable } from '@nestjs/common';
+
 import { UserEntity } from '@core/domain/user/entity/user.entity';
 import { IUserRepository } from '@core/domain/user/repository/user.repository';
 import {
@@ -7,6 +9,7 @@ import {
   UserSignUpCommand,
 } from '@core/domain/user/usecase/user-signup.usecase';
 
+@Injectable()
 export class UserSingUpUseCase implements IUserSignUpUseCase {
   constructor(private userRepository: IUserRepository) {}
 
