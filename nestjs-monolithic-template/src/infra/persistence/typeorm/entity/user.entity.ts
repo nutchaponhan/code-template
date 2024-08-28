@@ -3,11 +3,15 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
+import { OrderEntity } from '@core/domain/order/entity/order.entity';
 import { UserEntity } from '@core/domain/user/entity/user.entity';
+
+import { Order } from './order.entity';
 
 @Entity('users')
 export class User implements UserEntity {
@@ -25,6 +29,9 @@ export class User implements UserEntity {
 
   @Column({ name: 'email', nullable: false, type: 'varchar' })
   email: string;
+
+  @OneToMany(() => Order, (order) => order.user)
+  orders: OrderEntity[];
 
   @CreateDateColumn()
   createdAt: Date;

@@ -29,6 +29,7 @@ export class UserSingUpUseCase implements IUserSignUpUseCase {
       lastname: userSignupCommand.firstname,
       email: userSignupCommand.email,
       password: userSignupCommand.password,
+      orders: [],
     });
 
     return Ok(newUser);
