@@ -5,12 +5,16 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
+  Put,
 } from '@nestjs/common';
 import { CreateOrderUseCase } from '@usecase/order/create-order.usecase';
+import { EditOrderUseCase } from '@usecase/order/edit-order.usecase';
 import { GetProductListUseCase } from '@usecase/product/get-product-list.usecase';
 
 import { CreateOrderDto } from '@core/domain/order/dto/create-order.dto';
+import { EditOrderDto } from '@core/domain/order/dto/edit-order.dto';
 
 @Controller({
   path: 'user',
@@ -20,6 +24,7 @@ export class UserV1Controller {
   constructor(
     private getProductListUseCase: GetProductListUseCase,
     private createOrderUseCase: CreateOrderUseCase,
+    private editOrderUseCase: EditOrderUseCase,
   ) {}
 
   @Get('products')
@@ -44,6 +49,27 @@ export class UserV1Controller {
       Ok(newOrder) {
         return {
           data: newOrder,
+        };
+      },
+      Err(msg) {
+        throw new BadRequestException(msg);
+      },
+    });
+  }
+
+  @Put('orders/:orderId')
+  async editOrder(
+    @Param('orderId') orderId: string,
+    @Body() editOrderDto: EditOrderDto,
+  ) {
+    const result = await this.editOrderUseCase.exec({
+      orderId: parseInt(orderId),
+      ...editOrderDto,
+    });
+    return match(result, {
+      Ok(editOrder) {
+        return {
+          data: editOrder,
         };
       },
       Err(msg) {

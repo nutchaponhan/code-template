@@ -2,14 +2,14 @@ import { Result } from 'oxide.ts';
 
 import { OrderEntity } from '../entity/order.entity';
 
-export interface CreateOrderCommand {
+export interface EditOrderCommand {
+  orderId: number;
   detail?: string;
-  userId: number;
-  productIds: number[];
+  productIds?: number[];
 }
 
-export interface ICreateOrderUseCase {
+export interface IEditOrderUseCase {
   exec: (
-    createOrderCommand: CreateOrderCommand,
+    editOrderCommand: EditOrderCommand,
   ) => Promise<Result<OrderEntity, string>>;
 }
