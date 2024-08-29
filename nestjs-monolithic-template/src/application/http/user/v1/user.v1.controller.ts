@@ -1,14 +1,26 @@
 import { match } from 'oxide.ts';
 
-import { BadRequestException, Controller, Get } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Get,
+  Post,
+} from '@nestjs/common';
+import { CreateOrderUseCase } from '@usecase/order/create-order.usecase';
 import { GetProductListUseCase } from '@usecase/product/get-product-list.usecase';
+
+import { CreateOrderDto } from '@core/domain/order/dto/create-order.dto';
 
 @Controller({
   path: 'user',
   version: '1',
 })
 export class UserV1Controller {
-  constructor(private getProductListUseCase: GetProductListUseCase) {}
+  constructor(
+    private getProductListUseCase: GetProductListUseCase,
+    private createOrderUseCase: CreateOrderUseCase,
+  ) {}
 
   @Get('products')
   async getProductList() {
@@ -19,8 +31,23 @@ export class UserV1Controller {
           data: products,
         };
       },
-      Err() {
-        throw new BadRequestException();
+      Err(msg) {
+        throw new BadRequestException(msg);
+      },
+    });
+  }
+
+  @Post('orders')
+  async createOrder(@Body() createOrderDto: CreateOrderDto) {
+    const result = await this.createOrderUseCase.exec(createOrderDto);
+    return match(result, {
+      Ok(newOrder) {
+        return {
+          data: newOrder,
+        };
+      },
+      Err(msg) {
+        throw new BadRequestException(msg);
       },
     });
   }

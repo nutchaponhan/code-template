@@ -20,8 +20,14 @@ export class UserRepository
     super(repository.target, repository.manager, repository.queryRunner);
   }
 
-  async findUser({ email }: { email: string }): Promise<UserEntity> {
-    const user = await this.repository.findOne({ where: { email } });
+  async findUser({
+    id,
+    email,
+  }: {
+    id: number;
+    email: string;
+  }): Promise<UserEntity> {
+    const user = await this.repository.findOne({ where: { email, id } });
     return user;
   }
 }
