@@ -27,7 +27,7 @@ export class Product implements ProductEntity {
   @Column({ name: 'stock', nullable: false, type: 'int' })
   stock: number;
 
-  @ManyToMany(() => Order)
+  @ManyToMany(() => Order, (order) => order.products)
   orders: OrderEntity[];
 
   @CreateDateColumn()

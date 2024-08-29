@@ -7,6 +7,7 @@ import {
   Get,
   Post,
 } from '@nestjs/common';
+import { GetOrderSummaryUseCase } from '@usecase/order/get-order-summary.usecase';
 import { AddProductUseCase } from '@usecase/product/add-product.usecase';
 import { GetProductListUseCase } from '@usecase/product/get-product-list.usecase';
 
@@ -20,6 +21,7 @@ export class AdminV1Controller {
   constructor(
     private addProductUseCase: AddProductUseCase,
     private getProductListUseCase: GetProductListUseCase,
+    private getOrderSummaryUseCase: GetOrderSummaryUseCase,
   ) {}
 
   @Post('products')
@@ -46,6 +48,21 @@ export class AdminV1Controller {
       Ok(products) {
         return {
           data: products,
+        };
+      },
+      Err() {
+        throw new BadRequestException();
+      },
+    });
+  }
+
+  @Get('orders/summary')
+  async getOrderSummary() {
+    const result = await this.getOrderSummaryUseCase.exec();
+    return match(result, {
+      Ok(orderSummary) {
+        return {
+          data: orderSummary,
         };
       },
       Err() {

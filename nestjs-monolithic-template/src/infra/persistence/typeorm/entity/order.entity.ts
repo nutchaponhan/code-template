@@ -43,7 +43,7 @@ export class Order implements OrderEntity {
   @ManyToOne(() => User, (user) => user.id)
   user: UserEntity;
 
-  @ManyToMany(() => Product)
+  @ManyToMany(() => Product, (product) => product.orders)
   @JoinTable()
   products?: ProductEntity[];
 
